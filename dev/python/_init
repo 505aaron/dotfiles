@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+source ${0:A:h}/../../deploy
+source env.zsh
+
+install() {
+  case $(_os) in
+    macos) brew install pipenv ;;
+    arch) yay --needed --noconfirm -S python-pipenv ;;
+  esac
+}
+
+update() {
+  # TODO
+}
+
+link() {
+  mklink config/flake8 $XDG_CONFIG_HOME/
+}
+
+clean() {
+  rm -fv $XDG_CONFIG_HOME/flake8
+  rm -rfv $PYENV_ROOT
+}
+
+init "$@"
